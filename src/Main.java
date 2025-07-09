@@ -11,22 +11,22 @@ public class Main {
         fillEmployees();
 
         // Получаем полный список сотрудников
-        System.out.println("\nСписок всех сотрудников:");
+        System.out.println("Список всех сотрудников:");
         printAllEmployees();
 
         // Общая сумма затрат на зарплату
-        System.out.println("\nОбщая сумма заработной платы: " + calculateTotalSalary());
+        System.out.println("Общая сумма заработной платы: " + calculateTotalSalary());
 
         // Сотрудник с минимальной зарплатой
         Employee minSalaryEmp = findMinSalaryEmployee();
-        System.out.println("\nМинимальная зарплата: " + minSalaryEmp.getSalary() + ". Сотрудник: " + minSalaryEmp.getFirstName() + " " + minSalaryEmp.getLastName());
+        System.out.println("Минимальная зарплата: " + minSalaryEmp.getSalary() + ". Сотрудник: " + minSalaryEmp.getFirstName() + " " + minSalaryEmp.getLastName());
 
         // Сотрудник с максимальной зарплатой
         Employee maxSalaryEmp = findMaxSalaryEmployee();
-        System.out.println("\nМаксимальная зарплата: " + maxSalaryEmp.getSalary() + ". Сотрудник: " + maxSalaryEmp.getFirstName() + " " + maxSalaryEmp.getLastName());
+        System.out.println("Максимальная зарплата: " + maxSalaryEmp.getSalary() + ". Сотрудник: " + maxSalaryEmp.getFirstName() + " " + maxSalaryEmp.getLastName());
 
         // Среднее значение зарплат
-        System.out.println("\nСредняя заработная плата: " + calculateAverageSalary());
+        System.out.println("Средняя заработная плата: " + calculateAverageSalary());
 
         // Список фамилий всех сотрудников
         printNamesOfEmployees();
@@ -48,37 +48,74 @@ public class Main {
 
     // Метод вывода списка всех сотрудников
     private static void printAllEmployees() {
-        Arrays.stream(employees).forEach(System.out::println);
+        for (Employee employee : employees) {
+            if (employee != null) {
+                System.out.println(employee.toString());
+            }
+        }
     }
 
     // Сумма затрат на зарплату
     private static double calculateTotalSalary() {
-        return Arrays.stream(employees).mapToDouble(Employee::getSalary).sum();
+        double totalSalary = 0.0;
+        for (Employee employee : employees) {
+            if (employee != null) {
+                totalSalary += employee.getSalary();
+            }
+        }
+        return totalSalary;
     }
 
     // Минимальная зарплата среди сотрудников
-
     private static Employee findMinSalaryEmployee() {
-        return Arrays.stream(employees).min(Comparator.comparingDouble(Employee::getSalary)).orElse(null);
+        Employee minSalaryEmployee = null;
+        double minSalary = Double.MAX_VALUE;
+        for (Employee employee : employees) {
+            if (employee != null && employee.getSalary() < minSalary) {
+                minSalary = employee.getSalary();
+                minSalaryEmployee = employee;
+            }
+        }
+        return minSalaryEmployee;
     }
 
     // Максимальная зарплата среди сотрудников
     private static Employee findMaxSalaryEmployee() {
-        return Arrays.stream(employees).max(Comparator.comparingDouble(Employee::getSalary)).orElse(null);
+        Employee maxSalaryEmployee = null;
+        double maxSalary = Double.MIN_VALUE;
+        for (Employee employee : employees) {
+            if (employee != null && employee.getSalary() > maxSalary) {
+                maxSalary = employee.getSalary();
+                maxSalaryEmployee = employee;
+            }
+        }
+        return maxSalaryEmployee;
     }
 
     // Средняя зарплата
     private static double calculateAverageSalary() {
-        return Arrays.stream(employees).mapToDouble(Employee::getSalary).average().orElse(Double.NaN);
+        double totalSalary = 0.0;
+        int count = 0;
+        for (Employee employee : employees) {
+            if (employee != null) {
+                totalSalary += employee.getSalary();
+                count++;
+            }
+        }
+        return count > 0 ? totalSalary / count : Double.NaN;
     }
 
     // Печать только имен сотрудников
     private static void printNamesOfEmployees() {
-        for (Employee emp : employees) {
-            System.out.println(emp.getFirstName() + " " + emp.getLastName());
+        for (Employee employee : employees) {
+            if (employee != null) {
+                System.out.println(employee.getFirstName() + " " + employee.getLastName());
+            }
         }
     }
 }
+
+
 
 
 

@@ -10,23 +10,65 @@ public class Employee {
     private double salary;         // Зарплата
 
     public Employee(String firstName, String lastName, int department, double salary) {
-        this.id = nextId++;   // Присваиваем новый уникальный номер каждому сотруднику
-        setFirstName(firstName); // Проверяем вводимые значения через сеттеры
-        setLastName(lastName);
-        setDepartment(department);
-        setSalary(salary);
+        this.id = nextId++;
+        this.firstName= firstName; // Без проверки
+        this.lastName=lastName;     // Без проверки
+        this.department=department;   // Без проверки
+        this.salary=salary;    // Без проверки
+    }
+    // Геттеры и сеттеры для каждого поля
+    public int getId() {
+        return id;
     }
 
-    // Геттеры и сеттеры для каждого поля
-    public int getId() { return id; }
-    public String getFirstName() { return firstName; }
-    public void setFirstName(String firstName) { if (!firstName.isEmpty()) this.firstName = firstName.trim(); else throw new IllegalArgumentException("Имя должно быть задано."); }
-    public String getLastName() { return lastName; }
-    public void setLastName(String lastName) { if (!lastName.isEmpty()) this.lastName = lastName.trim(); else throw new IllegalArgumentException("Фамилия должна быть задана."); }
-    public int getDepartment() { return department; }
-    public void setDepartment(int department) { if (department >= 1 && department <= 5) this.department = department; else throw new IllegalArgumentException("Отдел должен быть от 1 до 5"); }
-    public double getSalary() { return salary; }
-    public void setSalary(double salary) { if (salary > 0) this.salary = salary; else throw new IllegalArgumentException("Зарплата должна быть положительной."); }
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        if (!firstName.isEmpty()) {
+            this.firstName = firstName.trim();
+        } else {
+            throw new IllegalArgumentException("Имя должно быть задано.");
+        }
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        if (!lastName.isEmpty()) {
+            this.lastName = lastName.trim();
+        } else {
+            throw new IllegalArgumentException("Фамилия должна быть задана.");
+        }
+    }
+
+    public int getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(int department) {
+        if (department >= 1 && department <= 5) {
+            this.department = department;
+        } else {
+            throw new IllegalArgumentException("Отдел должен быть от 1 до 5");
+        }
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        if (salary > 0) {
+            this.salary = salary;
+        } else {
+            throw new IllegalArgumentException("Зарплата должна быть положительной.");
+        }
+    }
+
 
 
 
